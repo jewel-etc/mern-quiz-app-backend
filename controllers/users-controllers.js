@@ -148,7 +148,7 @@ const signup = async (req, res, next) => {
                 userId: createdUser.id,
                 isAdmin: isAdmin
             },
-            'supersecretkey',
+            process.env.JWT_KEY,
             { expiresIn: '24h' }
         )
 
@@ -282,7 +282,7 @@ const login = async (req, res, next) => {
                 userId: existingUser.id,
                 isAdmin: isAdmin
             },
-            'supersecretkey',
+            process.env.JWT_KEY,
             { expiresIn: '24h' }
         )
 

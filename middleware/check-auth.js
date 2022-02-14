@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
             return next(error);
         }
 
-        const decodedToken = jwt.verify(token, 'supersecretkey');
+        const decodedToken = jwt.verify(token, process.env.JWT_KEY);
         req.userData = {
             userId: decodedToken.userId,
             isAdmin: decodedToken.isAdmin

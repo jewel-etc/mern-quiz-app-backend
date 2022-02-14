@@ -1,0 +1,9 @@
+{
+    "env":{
+        "DB_USER":"satadru",
+        "DB_PASSWORD":"Satadru1234",
+        "DB_NAME":"MERN-QUIZ",
+        "JWT_KEY":"supersecretkey"
+
+    }
+}
