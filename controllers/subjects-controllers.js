@@ -253,7 +253,7 @@ const deleteSubjectBySubjectId = async (req, res, next) => {
     try {
         deleteSubject = await Subject.findById(subjectId); //find subject to be deleted
 
-        deleteTopics = await Topic.find({ subjectId: subjectId });//find topics to be deleted
+        deleteTopics = await Topic.find({ _id: deleteSubject.topicIds });//find topics to be deleted
 
         //find deleteTopicsIds for delete units for this topics
         for (let i = 0; i < deleteTopics.length; i++) {
@@ -333,7 +333,7 @@ const deleteSubjectBySubjectId = async (req, res, next) => {
         sess.startTransaction();
         await QuesAns.deleteMany({ unitId: deleteUnitsIds, session: sess });
         await Unit.deleteMany({ topicId: deleteTopicsIds, session: sess });
-        await Topic.deleteMany({ _id:deleteSubject.topicIds, session: sess });
+        await Topic.deleteMany({ _id: deleteSubject.topicIds, session: sess });
         await deleteSubject.deleteOne({ session: sess });
         await userForFav.map(user => user.save())
         await userForSave.map(user => user.save())
