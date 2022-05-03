@@ -27,6 +27,8 @@ const signup = async (req, res, next) => {
     }
 
     const { favSave, name, username, password, adminPassword, newFavSubjectsIds, newSaveSubjectsIds } = req.body;
+   
+
 
 
     let existingUser, favSubjectsIds, saveSubjectsIds, favSubjects, saveSubjects;
@@ -80,8 +82,14 @@ const signup = async (req, res, next) => {
     else if (favSave === 'save') {
 
       
+        let saveSub;
+        saveSub = newSaveSubjectsIds.filter(save => newFavSubjectsIds.some(fav => save=== fav));
+        if(saveSub.length===0){
+            saveSub = newSaveSubjectsIds.filter(save => !newFavSubjectsIds.includes(save))
 
-        let saveSub = newSaveSubjectsIds.filter(save => !newFavSubjectsIds.includes(save))
+        }
+       
+         
 
         let favSub = newFavSubjectsIds.filter(fav => !newSaveSubjectsIds.includes(fav))
      
@@ -91,6 +99,9 @@ const signup = async (req, res, next) => {
 
     }
 
+   
+
+  
     
 
     let hashedPassword;
