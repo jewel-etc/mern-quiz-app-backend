@@ -12,14 +12,12 @@ const quesAnsControllers = require('../controllers/quesAns-controllers.js');
 
 
 
-
+router.post('/getQuesAnsByUnitId/:unitId', quesAnsControllers.getQuesAnsByUnitId);
 
 router.use(checkAuth);
 
 //                  *************************AFTER AUTH***************************************************
 
-
-router.post('/getQuesAnsByUnitId/:unitId', quesAnsControllers.getQuesAnsByUnitId);
 
 
 //create a new ques  by unit Id

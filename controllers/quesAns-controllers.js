@@ -120,8 +120,7 @@ const createQuesAnsByUnitId = async (req, res, next) => {
 
 const getQuesAnsByUnitId = async (req, res, next) => {
     const unitId = req.params.unitId;
-    const userId = req.body.userId;
-
+    
     let unit, quesAnswers;
     //find unit
     try {
@@ -152,12 +151,7 @@ const getQuesAnsByUnitId = async (req, res, next) => {
         return next(error);
 
     }
-
-    if (userId !== req.userData.userId) {
-        const error = new HttpError('Not allowed to fetch ques ans', 404);
-        return next(error);
-
-    }
+   
 
     if (!quesAnswers) {
         const error = new HttpError('Could not find quesAns', 404);
@@ -172,8 +166,6 @@ const getQuesAnsByUnitId = async (req, res, next) => {
 
 
 };
-
-
 
 
 

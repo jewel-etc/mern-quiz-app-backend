@@ -8,10 +8,11 @@ const checkAuth=require('../middleware/check-auth.js');
 
 const unitsController=require('../controllers/units-controllers.js');
 
-
+router.get('/fetchUnitsByTopicId/:topicId',unitsController.getUnitsByTopicId);
 
 
 router.use(checkAuth)
+
 
 
 //                  *************************AFTER AUTH***************************************************

@@ -76,6 +76,55 @@ const createUnitByTopictId = async (req, res, next) => {
 
 }
 
+//1.5 load units by topic id
+
+const fetchUnitsByTopicId = async (req, res, next) => {
+
+    const topicId = req.params.topicId;
+   
+    let topic, units;
+
+    try {
+        topic = await Topic.findById(topicId)
+
+    } catch (err) {
+        const error = new HttpError('Fetching units failed..', 500);
+        return next(error);
+
+    }
+
+ 
+
+    if (!topic) {
+        const error = new HttpError('Could not find a topic', 404);
+        return next(error);
+    }
+
+    try {
+        units = await Unit.find({ topicId: topicId });
+
+
+    } catch (err) {
+
+        const error = new HttpError('Fetching units failed..', 500);
+        return next(error);
+
+    }
+
+    if (!units) {
+        const error = new HttpError('Could not find units', 404);
+        return next(error);
+    }
+
+    res.json({
+        units: units.map(unit => unit.toObject({ getters: true }))
+
+
+    })
+
+
+}
+
 
 //2. get units by topicId
 
@@ -250,6 +299,7 @@ const deleteUnitByUnitId = async (req, res, next) => {
 
 
 module.exports = {
+    fetchUnitsByTopicId,
     getUnitsByTopicId,
     createUnitByTopictId,
     updateUnitByUnitId,
